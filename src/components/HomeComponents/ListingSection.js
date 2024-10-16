@@ -11,6 +11,7 @@ let properties = [
     baths: 2,
     garage: 1,
     price: 345000,
+    type: "office",
   },
   {
     image: "https://via.placeholder.com/400",
@@ -21,6 +22,7 @@ let properties = [
     baths: 3,
     garage: 2,
     price: 425000,
+    type: "apartment",
   },
   {
     image: "https://via.placeholder.com/400",
@@ -31,6 +33,7 @@ let properties = [
     baths: 2,
     garage: 2,
     price: 315000,
+    type: "home",
   },
   {
     image: "https://via.placeholder.com/400",
@@ -41,6 +44,7 @@ let properties = [
     baths: 2,
     garage: 2,
     price: 315000,
+    type: "land",
   },
   {
     image: "https://via.placeholder.com/400",
@@ -51,6 +55,7 @@ let properties = [
     baths: 2,
     garage: 2,
     price: 315000,
+    type: "land",
   },
   {
     image: "https://via.placeholder.com/400",
@@ -61,6 +66,7 @@ let properties = [
     baths: 2,
     garage: 2,
     price: 315000,
+    type: "home",
   },
 ];
 

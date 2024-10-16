@@ -5,6 +5,7 @@ import { FaTwitter } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
+import routes from "../../Config/route";
 
 const SocialMedia = ({ socialMedia = "", link = "/" }) => {
   return (
@@ -21,13 +22,13 @@ const SocialMedia = ({ socialMedia = "", link = "/" }) => {
 
 const navbar_data = [
   {
-    title: "Home",
+    title: "HOME",
     href: "/",
     subNav: [],
   },
   {
-    title: "INFRASTRUCTURE",
-    href: "/",
+    title: "PROPERTIES",
+    href: routes?.properties,
     subNav: [],
   },
   {
@@ -46,13 +47,13 @@ const navbar_data = [
     subNav: [],
   },
   {
-    title: "ABOUT US",
-    href: "/aboutus",
+    title: "LOG IN",
+    href: routes?.signin,
     subNav: [],
   },
   {
-    title: "CONTACT US",
-    href: "/contactus",
+    title: "SIGN UP",
+    href: routes?.signup,
     subNav: [],
   },
 ];
@@ -154,6 +155,43 @@ const NavLink2 = ({ content = {} }) => {
 };
 
 const Navbar = () => {
+  return (
+    <nav className="bg-gray-500 shadow ">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Logo/Text on the right */}
+        <div className="text-xl font-semibold text-white">ABC Real Estate</div>
+        {/* Links on the left */}
+        <div className="flex space-x-4">
+          <NavLink
+            to={routes?.home}
+            className="text-white hover:text-yellow-500"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to={routes?.properties}
+            className="text-white hover:text-yellow-500"
+          >
+            Properties
+          </NavLink>
+          <NavLink
+            to={routes?.signin}
+            href="#"
+            className="text-white hover:text-yellow-500"
+          >
+            Log in
+          </NavLink>
+          <NavLink
+            to={routes?.signup}
+            className="text-white hover:text-yellow-500"
+          >
+            Sign Up
+          </NavLink>
+        </div>
+      </div>
+    </nav>
+  );
+
   return (
     <div className=" w-full h-fit ">
       {/* First line  */}
