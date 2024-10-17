@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { FaInstagram } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa";
+import { FaBars, FaInstagram } from "react-icons/fa6";
+import { FaTimes, FaTwitter } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
@@ -155,85 +155,121 @@ const NavLink2 = ({ content = {} }) => {
 };
 
 const Navbar = () => {
-  return (
-    <nav className="bg-gray-500 shadow ">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo/Text on the right */}
-        <div className="text-xl font-semibold text-white">ABC Real Estate</div>
-        {/* Links on the left */}
-        <div className="flex space-x-4">
-          <NavLink
-            to={routes?.home}
-            className="text-white hover:text-yellow-500"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to={routes?.properties}
-            className="text-white hover:text-yellow-500"
-          >
-            Properties
-          </NavLink>
-          <NavLink
-            to={routes?.signin}
-            href="#"
-            className="text-white hover:text-yellow-500"
-          >
-            Log in
-          </NavLink>
-          <NavLink
-            to={routes?.signup}
-            className="text-white hover:text-yellow-500"
-          >
-            Sign Up
-          </NavLink>
-        </div>
-      </div>
-    </nav>
-  );
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className=" w-full h-fit ">
-      {/* First line  */}
-
-      <div className=" w-full h-[75px] flex flex-row justify-between ps-[8rem] pe-4 bg-[#333d40] ">
-        {/* Logo and title  */}
-        <div className=" w-fit h-full flex flex-row gap-[1rem]">
-          {/* Image  */}
-          <div className=" h-full w-fit flex flex-col justify-center ">
-            <img className=" w-full h-[90%] object-cover" />
+    <>
+      <nav className="bg-gray-600 shadow  hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          {/* Logo/Text on the right */}
+          <div className="text-xl font-semibold text-white">
+            ABC Real Estate
           </div>
-          {/* Title */}
-          <div className=" h-full w-fit flex flex-col justify-center">
-            <h1 className=" font-poppins text-[26px] font-bold text-white">
-              ABC REAL ESTATE AGENCY
-            </h1>
+          {/* Links on the left */}
+          <div className="flex space-x-7">
+            <NavLink
+              to={routes?.home}
+              className="text-white hover:text-yellow-500"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to={routes?.properties}
+              className="text-white hover:text-yellow-500"
+            >
+              View Properties
+            </NavLink>
+            <NavLink
+              to={routes?.properties}
+              className="text-white hover:text-yellow-500"
+            >
+              Contact Us
+            </NavLink>
+            <NavLink
+              to={routes?.properties}
+              className="text-white hover:text-yellow-500"
+            >
+              Want to sell ?
+            </NavLink>
+            <NavLink
+              to={routes?.signin}
+              href="#"
+              className="text-white hover:text-yellow-500"
+            >
+              Log in
+            </NavLink>
+            <NavLink
+              to={routes?.signup}
+              className="text-white hover:text-yellow-500"
+            >
+              Sign Up
+            </NavLink>
           </div>
         </div>
-        {/* Social links  */}
-        <div className="w-fit h-full flex flex-row items-center gap-[1rem]">
-          {/* Social media  */}
-          <SocialMedia
-            socialMedia={"instagram"}
-            link="https://www.instagram.com/hpoc90"
-          />
-          <SocialMedia
-            socialMedia={"twitter"}
-            link="https://twitter.com/HPOC90"
-          />
-          <SocialMedia
-            socialMedia={"facebook"}
-            link="https://www.facebook.com/hpoc.hpoc.31?mibextid=ZbWKwL"
-          />
-        </div>
-      </div>
+      </nav>
 
-      <div className=" w-full h-[75px] flex flex-row ps-3 pe-3  border-b-2 ">
-        {navbar_data?.map((item) => {
-          return <NavLink2 content={item} />;
-        })}
-      </div>
-    </div>
+      <nav className="bg-gray-600 w-full md:hidden text-white p-4 relative">
+        <div className=" w-full flex flex-row justify-between ps-4 pe-4">
+          {/* Hamburger Icon for Mobile */}
+
+          <button onClick={toggleMenu} aria-label="Toggle Menu">
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+          <div className="text-xl font-semibold text-white">
+            ABC Real Estate
+          </div>
+        </div>
+
+        {/* Mobile Menu Modal */}
+        {isOpen && (
+          <div className="absolute z-[100] top-[60px] left-0 w-full h-screen bg-gray-800 bg-opacity-90  overflow-auto space-y-6 text-white">
+            <ul className=" w-full h-fit flex flex-col gap-[0.5rem]">
+              <NavLink
+                to={routes?.home}
+                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to={routes?.properties}
+                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+              >
+                View Properties
+              </NavLink>
+              <NavLink
+                to={routes?.properties}
+                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+              >
+                Contact Us
+              </NavLink>
+              <NavLink
+                to={routes?.properties}
+                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+              >
+                Want to sell ?
+              </NavLink>
+              <NavLink
+                to={routes?.signin}
+                href="#"
+                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+              >
+                Log in
+              </NavLink>
+              <NavLink
+                to={routes?.signup}
+                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+              >
+                Sign Up
+              </NavLink>
+            </ul>
+          </div>
+        )}
+      </nav>
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ const SignUpLayout = () => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center  bg-gray-100">
+    <div className="w-full h-full flex justify-center items-start mt-[2rem]  bg-gray-100">
       <div className=" w-[750px] h-[600px] flex flex-row justify-end  rounded-[20px] overflow-hidden shadow-2xl ">
         <div className=" flex-1 w-full h-full  overflow-hidden ">
           <img

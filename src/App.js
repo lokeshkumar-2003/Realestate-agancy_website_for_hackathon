@@ -6,6 +6,7 @@ import routes from "./Config/route";
 import SignUpPage from "./pages/Home/SignUpPage";
 import SigninPage from "./pages/Home/SigninPage";
 import PropertyPage from "./pages/PropertyPage/PropertyPage";
+import PropertyIndivPage from "./pages/PropertyPage/PropertyIndivPage";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     path: routes?.properties,
     children: [
       { index: true, element: <PropertyPage /> },
-      { path: routes?.properties_id, element: <></> },
+      { path: routes?.properties_id, element: <PropertyIndivPage /> },
     ],
   },
 ]);

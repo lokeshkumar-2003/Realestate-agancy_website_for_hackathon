@@ -4,17 +4,22 @@ import Navbar from "../../components/HomeComponents/NavBar";
 import Testimonals_Mobile from "../../components/HomeComponents/Testimonals_Mobile";
 import Testimonial from "../../components/HomeComponents/Testimonial";
 import ListingSection from "../../components/HomeComponents/ListingSection";
+import Footer from "../../components/HomeComponents/Footer";
+import WebsiteWrapper from "../../components/HomeComponents/WebsiteWrapper";
 
 const Home = () => {
   return (
     <>
-      <Navbar />
-      <FirstSection />
+      <WebsiteWrapper>
+        <>
+          <FirstSection />
 
-      <ListingSection />
+          <ListingSection />
 
-      <Testimonial />
-      <Testimonals_Mobile />
+          <Testimonial />
+          <Testimonals_Mobile />
+        </>
+      </WebsiteWrapper>
     </>
   );
 };

@@ -10,8 +10,11 @@ import { FaHome } from "react-icons/fa";
 import { MdApartment } from "react-icons/md";
 import { PiOfficeChairFill } from "react-icons/pi";
 import { FaMapLocationDot } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import routes from "../Config/route";
 
 const PropertyCard = ({ content = {} }) => {
+  const navigate = useNavigate();
   return (
     <div className="relative xl:w-[400px] lg:w-[325px] md:w-[375px] w-[80vw] flex-col flex rounded overflow-hidden shadow-lg border border-gray-200 hover:scale-105 hover:shadow-2xl duration-300">
       <div className=" w-[35px] h-[35px] top-[1rem] left-[1rem] bg-black bg-opacity-15 absolute rounded-[50%] flex flex-row justify-center items-center ">
@@ -57,7 +60,12 @@ const PropertyCard = ({ content = {} }) => {
         </div>
         <div className="flex justify-between items-center">
           <span className="font-bold text-xl">₹{content?.price}</span>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          <button
+            onClick={() => {
+              navigate(routes?.properties + "/" + content?.id);
+            }}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
             View Property
           </button>
         </div>
