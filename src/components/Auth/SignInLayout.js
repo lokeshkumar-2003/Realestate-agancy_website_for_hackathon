@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const SignInLayout = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,10 @@ const SignInLayout = () => {
     // Handle form submission logic here
     console.log("Email:", email);
     console.log("Password:", password);
+    axios.post("http://localhost:2012/api/auth/login", {
+      email,
+      password,
+    });
   };
 
   return (
@@ -76,6 +81,7 @@ const SignInLayout = () => {
           {/* Sign In Button */}
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white py-2 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300"
           >
             SIGN IN

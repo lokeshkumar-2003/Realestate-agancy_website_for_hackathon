@@ -1,11 +1,9 @@
 import React from "react";
-
 import { TbRulerMeasure } from "react-icons/tb";
 import { LuBedSingle } from "react-icons/lu";
 import { FaBath } from "react-icons/fa6";
 import { GiHomeGarage } from "react-icons/gi";
 import { IoLocationSharp } from "react-icons/io5";
-
 import { FaHome } from "react-icons/fa";
 import { MdApartment } from "react-icons/md";
 import { PiOfficeChairFill } from "react-icons/pi";
@@ -15,9 +13,12 @@ import routes from "../Config/route";
 
 const PropertyCard = ({ content = {} }) => {
   const navigate = useNavigate();
+
+  console.log(content);
+
   return (
     <div className="relative xl:w-[400px] lg:w-[325px] md:w-[375px] w-[80vw] flex-col flex rounded overflow-hidden shadow-lg border border-gray-200 hover:scale-105 hover:shadow-2xl duration-300">
-      <div className=" w-[35px] h-[35px] top-[1rem] left-[1rem] bg-black bg-opacity-15 absolute rounded-[50%] flex flex-row justify-center items-center ">
+      <div className="w-[35px] h-[35px] top-[1rem] left-[1rem] bg-black bg-opacity-15 absolute rounded-[50%] flex flex-row justify-center items-center ">
         {content.type === "office" && (
           <PiOfficeChairFill size={18} color={"white"} />
         )}
@@ -40,29 +41,44 @@ const PropertyCard = ({ content = {} }) => {
         <p className="text-gray-600 text-sm flex items-center gap-[0.25rem]">
           <IoLocationSharp /> {content?.location}
         </p>
-        <div className="mt-4 mb-2 flex flex-wrap justify-between items-center text-gray-700">
-          <div className="flex items-center space-x-1">
-            <TbRulerMeasure />
-            <span>{content?.lotSize} sqft</span>
+
+        {/* Display different features based on the property type */}
+        {content.type === "land" ? (
+          <div className="mt-4 mb-2 flex flex-wrap justify-between items-center text-gray-700">
+            <div className="flex items-center space-x-1">
+              <TbRulerMeasure />
+              <span>{content?.landArea} sqft</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <span>Zoning: {content?.zoningType}</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-1">
-            <LuBedSingle />
-            <span>{content?.beds} Beds</span>
+        ) : (
+          <div className="mt-4 mb-2 flex flex-wrap justify-between items-center text-gray-700">
+            <div className="flex items-center space-x-1">
+              <TbRulerMeasure />
+              <span>{content?.lotSize} sqft</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <LuBedSingle />
+              <span>{content?.beds} Beds</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <FaBath />
+              <span>{content?.baths} Baths</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <GiHomeGarage />
+              <span>{content?.garage} Garage</span>
+            </div>
           </div>
-          <div className="flex items-center space-x-1">
-            <FaBath />
-            <span>{content?.baths} Baths</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <GiHomeGarage />
-            <span>{content?.garage} Garage</span>
-          </div>
-        </div>
+        )}
+
         <div className="flex justify-between items-center">
           <span className="font-bold text-xl">₹{content?.price}</span>
           <button
             onClick={() => {
-              navigate(routes?.properties + "/" + content?.id);
+              navigate(routes?.properties + "/" + content?.id); // Navigates to a specific property detail page using the property ID
             }}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
