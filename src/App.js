@@ -7,6 +7,7 @@ import SignUpPage from "./pages/Home/SignUpPage";
 import SigninPage from "./pages/Home/SigninPage";
 import PropertyPage from "./pages/PropertyPage/PropertyPage";
 import PropertyIndivPage from "./pages/PropertyPage/PropertyIndivPage";
+import PropertySubmissionForm from "./pages/Home/PropertyForm";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <PropertyPage /> },
       { path: routes?.properties_id, element: <PropertyIndivPage /> },
+      {
+        path: "add",
+        element: <PropertySubmissionForm />,
+      },
     ],
   },
 ]);

@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios"; // Make sure Axios is installed
+import axios from "axios";
 import PropertyCard from "../../templates/PropertyCard";
 
 const PropertyComponentLayout = () => {
   const [location, setLocation] = useState("");
-  const [propertyType, setPropertyType] = useState("");
-  const [priceRange, setPriceRange] = useState([20000, 200000]);
-  const [bedRooms, setBedRooms] = useState(1);
-  const [bathRooms, setBathRooms] = useState(1);
   const [filteredProperties, setFilteredProperties] = useState([]);
 
   const handleSearch = async () => {
@@ -16,17 +12,11 @@ const PropertyComponentLayout = () => {
         "http://localhost:2012/api/property/filter",
         {
           location,
-          propertyType,
-          price: {
-            min: priceRange[0],
-            max: priceRange[1],
-          },
-          bedRooms,
-          bathRooms,
         }
       );
-      console.log(response.data.filteredProperties);
-      setFilteredProperties(response.data.filteredProperties); // Assuming API returns the filtered properties
+      console.log(response.data.properties); // Log the correct property array
+      // Set the properties from the API response
+      setFilteredProperties(response.data.properties || []);
     } catch (error) {
       console.error("Error fetching properties:", error);
     }
@@ -61,87 +51,6 @@ const PropertyComponentLayout = () => {
             </select>
           </div>
 
-          {/* Property Type */}
-          <div className="flex flex-col">
-            <label className="md:text-[14px] text-[12px] text-gray-600">
-              Property Type
-            </label>
-            <select
-              value={propertyType}
-              onChange={(e) => setPropertyType(e.target.value)}
-              className="border rounded-lg p-2 mt-1 w-32"
-            >
-              <option value="">Any</option>
-              <option value="apartment">Apartment</option>
-              <option value="home">Home</option>
-              <option value="land">Land</option>
-              <option value="office">Office</option>
-              {/* Add more property types here */}
-            </select>
-          </div>
-
-          {/* Price */}
-          <div className="flex flex-col">
-            <label className="md:text-[14px] text-[12px] text-gray-600">
-              Price ($)
-            </label>
-            <div className="flex space-x-2 mt-1">
-              <input
-                type="text"
-                value={priceRange[0]}
-                onChange={(e) =>
-                  setPriceRange([+e.target.value, priceRange[1]])
-                }
-                className="border rounded-lg p-2 w-32"
-              />
-              <span className="text-gray-500">-</span>
-              <input
-                type="text"
-                value={priceRange[1]}
-                onChange={(e) =>
-                  setPriceRange([priceRange[0], +e.target.value])
-                }
-                className="border rounded-lg p-2 w-32"
-              />
-            </div>
-          </div>
-
-          {/* Bedrooms */}
-          <div className="flex flex-col">
-            <label className="md:text-[14px] text-[12px] text-gray-600">
-              Bed Room
-            </label>
-            <select
-              value={bedRooms}
-              onChange={(e) => setBedRooms(+e.target.value)}
-              className="border rounded-lg p-2 mt-1 w-24"
-            >
-              <option value={1}>01</option>
-              <option value={2}>02</option>
-              <option value={3}>03</option>
-              <option value={4}>04</option>
-              {/* Add more bedroom options here */}
-            </select>
-          </div>
-
-          {/* Bathrooms */}
-          <div className="flex flex-col">
-            <label className="md:text-[14px] text-[12px] text-gray-600">
-              Bath Room
-            </label>
-            <select
-              value={bathRooms}
-              onChange={(e) => setBathRooms(+e.target.value)}
-              className="border rounded-lg p-2 mt-1 w-24"
-            >
-              <option value={1}>01</option>
-              <option value={2}>02</option>
-              <option value={3}>03</option>
-              <option value={4}>04</option>
-              {/* Add more bathroom options here */}
-            </select>
-          </div>
-
           {/* Search Button */}
           <button
             onClick={handleSearch}
@@ -154,9 +63,9 @@ const PropertyComponentLayout = () => {
 
       {/* Displaying the filtered properties */}
       <div className="w-full h-fit grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-items-center gap-y-[2rem] mt-[3rem] mb-[5rem]">
-        {filteredProperties.length > 0 ? (
+        {filteredProperties && filteredProperties.length > 0 ? (
           filteredProperties.map((property) => (
-            <PropertyCard key={property.id} property={property} />
+            <PropertyCard key={property._id} property={property} />
           ))
         ) : (
           <p>No properties found</p>

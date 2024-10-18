@@ -17,15 +17,16 @@ const SignUpLayout = () => {
     // Handle form submission logic here
     console.log("Email:", email);
     console.log("Password:", password);
-    if (showConfirmPassword === showPassword) {
-      await axios.post("http://localhost:2012/api/auth/register", {
+    console.log("username", username);
+    await axios
+      .post("e", {
         username,
         email,
         password,
+      })
+      .then((res) => {
+        console.log(res);
       });
-    } else {
-      console.log("password should match");
-    }
   };
 
   return (

@@ -11,7 +11,7 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import routes from "../Config/route";
 
-const PropertyCard = ({ content = {} }) => {
+const PropertyCard = (content) => {
   const navigate = useNavigate();
 
   console.log(content);
@@ -32,7 +32,7 @@ const PropertyCard = ({ content = {} }) => {
       </div>
       <img
         className="w-full h-48 object-cover"
-        src={content?.image}
+        src={content?.images}
         alt={content?.title}
       />
 
